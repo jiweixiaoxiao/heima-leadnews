@@ -1,10 +1,12 @@
 package com.heima.article.service.impl;
 
-import com.heima.article.constans.ArticleConstans;
+import com.heima.article.service.AppArticleService;
+import com.heima.common.article.constans.ArticleConstans;
 import com.heima.model.article.dtos.ArticleHomeDto;
 import com.heima.model.article.pojos.ApArticle;
 import com.heima.model.common.dtos.ResponseResult;
 import com.heima.model.mappers.app.ApArticleMapper;
+import com.heima.model.mappers.app.ApUserArticleListMapper;
 import com.heima.model.user.pojos.ApUser;
 import com.heima.model.user.pojos.ApUserArticleList;
 import com.heima.utils.threadlocal.AppThreadLocalUtils;
@@ -16,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
+@SuppressWarnings("all")
 public class AppArticleServiceImpl implements AppArticleService {
 
     // 单页最大加载的数字
@@ -35,19 +38,26 @@ public class AppArticleServiceImpl implements AppArticleService {
      * @param size 每次返回数据量
      * @return 数据列表
      */
+    @Override
     public ResponseResult load(Short type, ArticleHomeDto dto) {
+        if(dto == null){
+            dto = new ArticleHomeDto();
+        }
+        //获取用户的信息
         ApUser user = AppThreadLocalUtils.getUser();
         Integer size = dto.getSize();
-        String tag = dto.getTag();
+        String tag = dto.getTag(); // 频道ID
         // 分页参数校验
         if (size == null || size <= 0) {
             size = 20;
         }
+        //当size大于MAX_PAGE_SIZE则取MAX_PAGE_SIZE，当size小于MAX_PAGE_SIZE则取size
         size = Math.min(size,MAX_PAGE_SIZE);
         dto.setSize(size);
         //  类型参数校验
-        if (!type.equals(ArticleConstans.LOADTYPE_LOAD_MORE) && !type.equals(ArticleConstans.LOADTYPE_LOAD_NEW))
+        if (!type.equals(ArticleConstans.LOADTYPE_LOAD_MORE) && !type.equals(ArticleConstans.LOADTYPE_LOAD_NEW)) {
             type = ArticleConstans.LOADTYPE_LOAD_MORE;
+        }
         // 文章频道参数验证
         if (StringUtils.isEmpty(tag)) {
             dto.setTag(ArticleConstans.DEFAULT_TAG);

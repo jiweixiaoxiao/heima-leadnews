@@ -1,8 +1,8 @@
 package com.heima.article.controller.v1;
 
 import com.heima.article.apis.ArticleHomeControllerApi;
-import com.heima.article.constans.ArticleConstans;
 import com.heima.article.service.AppArticleService;
+import com.heima.common.article.constans.ArticleConstans;
 import com.heima.model.article.dtos.ArticleHomeDto;
 import com.heima.model.common.dtos.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
