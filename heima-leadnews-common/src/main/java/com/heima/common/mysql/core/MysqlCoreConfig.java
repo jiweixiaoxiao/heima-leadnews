@@ -69,6 +69,7 @@ public class MysqlCoreConfig {
         sessionFactory.setDataSource(mysqlCoreDataSource);
         sessionFactory.setMapperLocations(resolver.getResources(this.getMapperFilePath()));
         sessionFactory.setTypeAliasesPackage(this.getAliasesPackage());
+        //开启驼峰标识
         org.apache.ibatis.session.Configuration mybatisConf = new org.apache.ibatis.session.Configuration();
         mybatisConf.setMapUnderscoreToCamelCase(true);
         sessionFactory.setConfiguration(mybatisConf);
