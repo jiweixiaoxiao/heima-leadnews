@@ -11,6 +11,7 @@
         <module name="heima-leadnews-common" />
         <module name="heima-leadnews-model" />
         <module name="heima-leadnews-utils" />
+        <module name="heima-leadnews-behavior" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -22,6 +23,7 @@
       <module name="heima-leadnews" options="" />
       <module name="heima-leadnews-apis" options="-parameters" />
       <module name="heima-leadnews-article" options="-parameters" />
+      <module name="heima-leadnews-behavior" options="-parameters" />
       <module name="heima-leadnews-common" options="-parameters" />
       <module name="heima-leadnews-model" options="-parameters" />
       <module name="heima-leadnews-utils" options="-parameters" />
