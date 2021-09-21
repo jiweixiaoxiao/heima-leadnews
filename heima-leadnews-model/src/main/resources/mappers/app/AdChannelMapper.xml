@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heima.model.mappers.admin.AdChannelMapper">
+    <resultMap id="resultMap" type="com.heima.model.admin.pojos.AdChannel">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="is_default" property="isDefault"/>
+        <result column="status" property="status"/>
+        <result column="ord" property="ord"/>
+        <result column="created_time" property="createdTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, name, description, is_default, status, ord, created_time
+    </sql>
+    <!-- 依据ID获取 -->
+    <select id="loadAdminsChannelList" resultMap="resultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ad_channel
+        where is_default = #{isDefault}
+        and status = #{status}
+    </select>
+
+</mapper>
